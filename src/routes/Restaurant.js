@@ -29,12 +29,12 @@ router.put('/restaurant/:id', async (req, res) => {
     try {
         let id = req.params.id;
         let restaurant = req.body;
-        let updatedRestaurant = await Restaurant.findByIdAndUpdate(id);
+        let updatedRestaurant = await Restaurant.findByIdAndUpdate({ _id: id }, restaurant);
 
         if (!updatedRestaurant) {
             return res.status(400).send({ message: 'Restaurant not found' });
         }
-        await res.status(200).send({ message: 'Restaurant updated' });
+        res.status(200).send({ message: 'Restaurant updated' });
     } catch (error) {
         res.status(500).send(error);
     }
@@ -52,7 +52,7 @@ router.get('/restaurant/:id', async (req, res) => {
 router.delete('/restaurant/:id', async (req, res) => {
     try {
         let id = req.params.id;
-        let restaurantToDelete = await Restaurant.findByIdAndDelete(id);
+        let restaurantToDelete = await Restaurant.findByIdAndDelete({ _id: id });
         if (!restaurantToDelete) {
             res.status(400).send({ message: 'Delete unsuccessful' });
         }

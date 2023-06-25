@@ -43,10 +43,10 @@ router.post('/auth/logout', auth, async (req, res) => {
         const user = req.user;
         user.token = '';
         await user.save();
-        res.send();
+        res.send({ message: 'Logout successful' });
     } catch (e) {
         //console.log(e)
-        res.status(400).send();
+        res.status(500).send(e);
     }
 });
 

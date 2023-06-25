@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const userRouter = require('./src/routes/User');
 const restaurantRouter = require('./src/routes/Restaurant');
+const menuRouter = require('./src/routes/MenuItem');
+const orderRouter = require('./src/routes/Order');
 
 require('./src/dbconfig/config');
 
@@ -14,6 +16,8 @@ app.use(cors());
 app.use(express.json());
 app.use(userRouter);
 app.use(restaurantRouter);
+app.use(menuRouter);
+app.use(orderRouter);
 
 app.get('/', (req, res) => {
     res.send('Welcome to my restaurant API');
